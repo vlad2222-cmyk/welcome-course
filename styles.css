@@ -379,43 +379,11 @@ html, body {
 .summary-shot .variant-phone { cursor: default; }
 .summary-shot .cap { color:#fff; text-align:center; font-size:12.5px; font-weight:600; margin-top:10px; opacity:.8; }
 
-/* ---------- Tablet / iPad (portrait & landscape) ---------- */
-@media (max-width: 1024px) {
-  .page { padding: 22px clamp(16px, 3vw, 40px) 56px; }
-  .wizard { max-width: 880px; }
-
-  .card { padding: 28px 28px 32px; }
-  .card.wide { padding: 26px 22px 30px; }
-  .card-title { font-size: clamp(22px, 3.2vw, 28px); }
-  .card-desc { font-size: 15px; }
-
-  /* Keep the two-up comparison — it's the point — just tighten it */
-  .compare-panel { gap: clamp(18px, 3vw, 36px); padding: 22px 22px; }
-  .variant-toggle { gap: clamp(14px, 2.5vw, 22px); }
-  .toggle-btn { padding: 11px clamp(20px, 4vw, 32px); }
-
-  .summary-shot { width: clamp(150px, 22vw, 200px); }
-
-  /* Stepper: smaller nodes/labels so all five fit without crowding */
-  .stepper-node { width: 64px; }
-  .node-circle { width: 38px; height: 38px; font-size: 14px; }
-  .node-label { font-size: 12.5px; margin-top: 8px; }
-}
-
-/* ---------- Phones ---------- */
-@media (max-width: 640px) {
+@media (max-width: 760px) {
   .form-grid, .summary-grid { grid-template-columns: 1fr; }
-  .compare-panel { grid-template-columns: 1fr; gap: 26px; }
+  .compare-panel { grid-template-columns: 1fr; }
   .variant-toggle { grid-template-columns: 1fr; }
   .stmt-field.name { flex: 1 1 100%; }
   .stmt-row { flex-wrap: wrap; }
   .card-title { font-size: 24px; }
-
-  .app-header { flex-wrap: wrap; }
-  .footer { flex-direction: column; align-items: stretch; gap: 12px; }
-  .footer .btn { width: 100%; }
-  .footer-hint { text-align: center; }
-
-  /* Hide stepper labels on the smallest screens; keep the numbered circles */
-  .node-label { display: none; }
 }
