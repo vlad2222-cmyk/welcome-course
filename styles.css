@@ -3,9 +3,10 @@
    ============================================================ */
 :root {
   --primary: #5b57e8;
-  --primary-dark: #4a46d6;
-  --primary-soft: #e7e7fb;
-  --primary-softer: #eef0fb;
+  --primary-dark: color-mix(in srgb, var(--primary) 82%, #000);
+  --primary-soft: color-mix(in srgb, var(--primary) 15%, #fff);
+  --primary-softer: color-mix(in srgb, var(--primary) 8%, #fff);
+  --primary-glow: color-mix(in srgb, var(--primary) 70%, transparent);
   --ink: #1b2440;
   --ink-soft: #2a3354;
   --muted: #7e869c;
@@ -13,14 +14,15 @@
   --line: #e6e9f2;
   --field: #eef1f8;
   --field-border: #e2e6f1;
-  --page: #eef1f8;
+  --page: color-mix(in srgb, var(--primary) 9%, #f3f4fa);
   --card: #ffffff;
   --danger: #ef4444;
   --danger-soft: #fde9e9;
   --dark-panel: #121a2e;
   --shadow-card: 0 18px 50px -28px rgba(38, 43, 86, .35);
-  --shadow-btn: 0 14px 26px -12px rgba(91, 87, 232, .65);
+  --shadow-btn: 0 14px 26px -12px var(--primary-glow);
   --radius-card: 26px;
+  transition: --primary .4s ease;
 }
 
 * { box-sizing: border-box; }
@@ -32,6 +34,7 @@ html, body {
   color: var(--ink);
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
+  transition: background-color .4s ease;
 }
 
 #root { min-height: 100vh; }
@@ -39,8 +42,9 @@ html, body {
 .page {
   min-height: 100vh;
   background:
-    radial-gradient(120% 60% at 50% -10%, #f6f7fd 0%, var(--page) 55%);
+    radial-gradient(120% 60% at 50% -10%, color-mix(in srgb, var(--primary) 5%, #fff) 0%, var(--page) 55%);
   padding: 26px clamp(16px, 4vw, 56px) 64px;
+  transition: background .4s ease;
 }
 
 .wizard {
@@ -56,11 +60,11 @@ html, body {
   gap: 16px;
   padding: 4px 4px 0;
 }
-.brand { display: flex; align-items: center; gap: 14px; }
+.brand { display: flex; align-items: center; gap: 22px; }
 .brand-logo {
-  width: 44px; height: 44px; border-radius: 13px;
-  background: linear-gradient(150deg, #6f6bf0, #514bdf);
-  box-shadow: 0 8px 18px -8px rgba(81, 75, 223, .8);
+  height: 50px;
+  width: auto;
+  display: block;
   flex: none;
 }
 .brand-title { font-size: 17px; font-weight: 800; letter-spacing: -.2px; }
@@ -93,7 +97,7 @@ html, body {
 }
 .stepper-node.active .node-circle {
   background: var(--primary); color: #fff; border-color: var(--primary);
-  box-shadow: 0 8px 18px -8px rgba(91, 87, 232, .8);
+  box-shadow: 0 8px 18px -8px var(--primary-glow);
 }
 .stepper-node.done .node-circle {
   background: var(--primary); color: #fff; border-color: var(--primary);
@@ -174,7 +178,7 @@ html, body {
 .input:focus {
   border-color: var(--primary);
   background: #fff;
-  box-shadow: 0 0 0 4px rgba(91, 87, 232, .12);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 14%, transparent);
 }
 .input.invalid {
   border-color: var(--danger);
@@ -192,8 +196,8 @@ html, body {
   background: var(--field);
   border: 1.5px solid transparent;
   border-radius: 12px;
-  padding: 13px 16px;
-  display: flex; align-items: center; gap: 14px;
+  padding: 13px 18px;
+  display: flex; align-items: center; gap: 26px;
   transition: border-color .15s ease, background .15s ease;
 }
 .color-field.invalid { border-color: var(--danger); background: var(--danger-soft); }
@@ -264,17 +268,17 @@ html, body {
 .toggle-btn:hover { border-color: #cfd4e6; }
 .toggle-btn.selected {
   background: var(--primary); color: #fff; border-color: var(--primary);
-  box-shadow: 0 10px 22px -12px rgba(91, 87, 232, .9);
+  box-shadow: 0 10px 22px -12px var(--primary-glow);
 }
 .toggle-btn.need { border-color: var(--danger); color: var(--danger); }
 
 .compare-panel {
   background: var(--dark-panel);
   border-radius: 22px;
-  padding: 22px;
+  padding: 24px 28px;
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 22px;
+  gap: 44px;
   align-items: start;
 }
 .variant-col { display: flex; flex-direction: column; }
@@ -295,7 +299,7 @@ html, body {
 .variant-phone img { width: 100%; display: block; }
 .variant-col.selected .variant-phone {
   border-color: var(--primary);
-  box-shadow: 0 0 0 4px rgba(91, 87, 232, .35);
+  box-shadow: 0 0 0 4px color-mix(in srgb, var(--primary) 35%, transparent);
 }
 .variant-check {
   position: absolute; top: 14px; right: 14px; z-index: 3;
@@ -336,7 +340,7 @@ html, body {
   box-shadow: var(--shadow-btn);
 }
 .btn-primary:hover { background: var(--primary-dark); }
-.btn-primary.locked { background: #c3c2ee; box-shadow: none; cursor: pointer; }
+.btn-primary.locked { background: color-mix(in srgb, var(--primary) 32%, #fff); box-shadow: none; cursor: pointer; }
 .btn-ghost {
   background: #fff; color: var(--ink-soft);
   border: 1.5px solid var(--field-border);

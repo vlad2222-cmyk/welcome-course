@@ -4,13 +4,15 @@ const { useState, useEffect, useRef } = React;
 const STORAGE_KEY = "dragonWizard.v1";
 
 const COLORS = [
-  { id: "violet", hex: "#6366f1" },
-  { id: "green", hex: "#22c55e" },
-  { id: "orange", hex: "#f59e0b" },
-  { id: "red", hex: "#ef4444" },
-  { id: "pink", hex: "#ec4899" },
-  { id: "blue", hex: "#0ea5e9" },
+  { id: "violet", hex: "#6366f1", theme: "#5b57e8" },
+  { id: "green", hex: "#22c55e", theme: "#1faa55" },
+  { id: "orange", hex: "#f59e0b", theme: "#ef8c0c" },
+  { id: "red", hex: "#ef4444", theme: "#e23b3b" },
+  { id: "pink", hex: "#ec4899", theme: "#e23b8a" },
+  { id: "blue", hex: "#0ea5e9", theme: "#0c9bdc" },
 ];
+const DEFAULT_PRIMARY = "#5b57e8";
+const themeFor = (id) => (COLORS.find((c) => c.id === id) || {}).theme || DEFAULT_PRIMARY;
 
 const VARIANTS = {
   home: {
@@ -82,7 +84,7 @@ function Header({ step }) {
   return (
     <header className="app-header">
       <div className="brand">
-        <div className="brand-logo" />
+        <img className="brand-logo" src="assets/gameloft-logo.png" alt="Gameloft" />
         <div>
           <div className="brand-title">Curs de Product Design</div>
           <div className="brand-sub">{meta.sub}</div>
@@ -357,6 +359,11 @@ function App() {
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
   }, [data]);
+
+  // recolor the whole UI based on the chosen favourite colour
+  useEffect(() => {
+    document.documentElement.style.setProperty("--primary", themeFor(data.profil.culoare));
+  }, [data.profil.culoare]);
 
   const step = data.step;
   const set = (d) => { setData(d); setShowErr(false); };
