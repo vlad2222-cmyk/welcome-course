@@ -283,10 +283,7 @@ function VariantCol({ info, selected, onClick }) {
       <div className="variant-col-label">{info.label}</div>
       <div className="variant-phone" onClick={onClick}>
         <div className="variant-check"><IconCheck s={16} /></div>
-        <div className="scroll">
-          <img src={info.img} alt={info.label} />
-        </div>
-        <div className="scroll-hint">derulează pentru a vedea tot ↓</div>
+        <img src={info.img} alt={info.label} />
       </div>
     </div>
   );
@@ -340,7 +337,7 @@ function StepRezumat({ data }) {
           return (
             <div className="summary-shot" key={s.kind}>
               <div className="variant-phone">
-                <div className="scroll"><img src={VARIANTS[s.kind][v].img} alt={s.cap} /></div>
+                <img src={VARIANTS[s.kind][v].img} alt={s.cap} />
               </div>
               <div className="cap">{s.cap} · {variantName(v)}</div>
             </div>

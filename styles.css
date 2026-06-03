@@ -275,6 +275,7 @@ html, body {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 22px;
+  align-items: start;
 }
 .variant-col { display: flex; flex-direction: column; }
 .variant-col-label {
@@ -286,18 +287,11 @@ html, body {
   border-radius: 26px;
   overflow: hidden;
   cursor: pointer;
-  height: 660px;
   background: #dbe6fb;
   border: 3px solid transparent;
   transition: border-color .18s ease, box-shadow .18s ease;
 }
-.variant-phone .scroll {
-  height: 100%;
-  overflow-y: auto;
-  overflow-x: hidden;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: thin;
-}
+.variant-phone .scroll { display: block; }
 .variant-phone img { width: 100%; display: block; }
 .variant-col.selected .variant-phone {
   border-color: var(--primary);
@@ -378,7 +372,7 @@ html, body {
   background: var(--dark-panel); border-radius: 22px; padding: 24px;
 }
 .summary-shot { width: 200px; }
-.summary-shot .variant-phone { height: 360px; cursor: default; }
+.summary-shot .variant-phone { cursor: default; }
 .summary-shot .cap { color:#fff; text-align:center; font-size:12.5px; font-weight:600; margin-top:10px; opacity:.8; }
 
 @media (max-width: 760px) {
@@ -388,5 +382,4 @@ html, body {
   .stmt-field.name { flex: 1 1 100%; }
   .stmt-row { flex-wrap: wrap; }
   .card-title { font-size: 24px; }
-  .variant-phone { height: 520px; }
 }
