@@ -1,5 +1,9 @@
 /* ============================================================
    Curs de Product Design — interactive wizard
+   ------------------------------------------------------------
+   Old-Safari note (iOS 14.0 / Safari 14): flexbox `gap` is NOT
+   supported below 14.1, so all flex spacing is done with margins
+   instead. Grid `gap` IS supported, so grids keep using it.
    ============================================================ */
 :root {
   --primary: #5b57e8;
@@ -60,15 +64,15 @@ html, body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 16px;
   padding: 4px 4px 0;
 }
-.brand { display: flex; align-items: center; gap: 22px; }
+.brand { display: flex; align-items: center; }
 .brand-logo {
   height: 50px;
   width: auto;
   display: block;
   flex: none;
+  margin-right: 22px; /* was flex gap */
 }
 .brand-title { font-size: 17px; font-weight: 800; letter-spacing: -.2px; }
 .brand-sub { font-size: 13px; color: var(--muted); margin-top: 2px; font-weight: 500; }
@@ -81,6 +85,7 @@ html, body {
   padding: 9px 16px;
   border-radius: 999px;
   white-space: nowrap;
+  margin-left: 16px; /* was flex gap */
 }
 
 /* ---------- Stepper ---------- */
@@ -120,7 +125,7 @@ html, body {
   overflow: hidden;
 }
 .stepper-line .fill {
-  position: absolute; inset: 0; width: 0;
+  position: absolute; top: 0; left: 0; bottom: 0; width: 0; /* `inset:0` unsupported on iOS 14.0 */
   background: var(--primary);
   transition: width .35s ease;
 }
@@ -190,9 +195,10 @@ html, body {
 .input.invalid::placeholder { color: #e08585; }
 
 .field-error {
-  display: flex; align-items: center; gap: 5px;
+  display: flex; align-items: center;
   margin-top: 7px; font-size: 12.5px; font-weight: 600; color: var(--danger);
 }
+.field-error > * + * { margin-left: 5px; } /* was flex gap */
 
 /* color swatches */
 .color-field {
@@ -200,9 +206,10 @@ html, body {
   border: 1.5px solid transparent;
   border-radius: 12px;
   padding: 13px 18px;
-  display: flex; align-items: center; gap: 26px;
+  display: flex; align-items: center;
   transition: border-color .15s ease, background .15s ease;
 }
+.color-field > * + * { margin-left: 26px; } /* was flex gap */
 .color-field.invalid { border-color: var(--danger); background: var(--danger-soft); }
 .swatch {
   width: 28px; height: 28px; border-radius: 50%;
@@ -223,9 +230,10 @@ html, body {
   padding: 26px 28px;
 }
 .stmt-row {
-  display: flex; align-items: flex-start; gap: 16px;
+  display: flex; align-items: flex-start;
   margin-bottom: 22px;
 }
+.stmt-row > * + * { margin-left: 16px; } /* was flex gap */
 .stmt-row:last-child { margin-bottom: 0; }
 .stmt-connector {
   font-weight: 800; font-size: 17px; color: var(--ink);
@@ -323,8 +331,9 @@ html, body {
 .select-error {
   text-align: center; color: var(--danger); font-weight: 600;
   font-size: 13.5px; margin: 14px 0 0;
-  display: flex; align-items: center; justify-content: center; gap: 6px;
+  display: flex; align-items: center; justify-content: center;
 }
+.select-error > * + * { margin-left: 6px; } /* was flex gap */
 
 /* ---------- Footer nav ---------- */
 .footer {
@@ -360,7 +369,8 @@ html, body {
   margin: 0 0 14px; font-size: 13px; font-weight: 800; letter-spacing: .5px;
   text-transform: uppercase; color: var(--primary);
 }
-.summary-line { display: flex; justify-content: space-between; gap: 14px; padding: 8px 0; border-bottom: 1px solid var(--field-border); }
+.summary-line { display: flex; justify-content: space-between; padding: 8px 0; border-bottom: 1px solid var(--field-border); }
+.summary-line > * + * { margin-left: 14px; } /* was flex gap */
 .summary-line:last-child { border-bottom: none; }
 .summary-line .k { color: var(--muted); font-size: 14px; font-weight: 600; }
 .summary-line .v { color: var(--ink); font-size: 14px; font-weight: 700; text-align: right; }
@@ -375,10 +385,11 @@ html, body {
   font-weight: 700; font-size: 13px; padding: 4px 12px; border-radius: 999px;
 }
 .summary-full {
-  margin-top: 26px; display: flex; gap: 56px; flex-wrap: wrap; justify-content: center;
+  margin-top: 26px; display: flex; flex-wrap: wrap; justify-content: center;
   background: var(--dark-panel); border-radius: 22px; padding: 28px 32px;
 }
-.summary-shot { width: 200px; }
+.summary-shot { width: 200px; margin: 14px 28px 0; } /* margins replace flex gap (56px between → 28px each side) */
+.summary-shot:first-child { margin-top: 14px; }
 .summary-shot .variant-phone { cursor: default; }
 .summary-shot .cap { color:#fff; text-align:center; font-size:12.5px; font-weight:600; margin-top:10px; opacity:.8; }
 
@@ -388,5 +399,7 @@ html, body {
   .variant-toggle { grid-template-columns: 1fr; }
   .stmt-field.name { flex: 1 1 100%; }
   .stmt-row { flex-wrap: wrap; }
+  /* when the statement rows wrap, swap the horizontal margin for vertical */
+  .stmt-row > * + * { margin-left: 0; margin-top: 12px; }
   .card-title { font-size: 24px; }
 }
