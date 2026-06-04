@@ -52,18 +52,18 @@ function applyTheme(primary) {
 const VARIANTS = {
   home: {
     title: "Alege varianta de homepage",
-    v1: { label: "Varianta 1", img: "assets/v1-home.png" },
-    v2: { label: "Varianta 2", img: "assets/v2-home.png" },
+    v1: { label: "Varianta 1", img: "assets/v1-home.jpg" },
+    v2: { label: "Varianta 2", img: "assets/v2-home.jpg" },
   },
   search: {
     title: "Alege varianta de cautare",
-    v1: { label: "Varianta 1", img: "assets/v1-search.png" },
-    v2: { label: "Varianta 2", img: "assets/v2-search.png" },
+    v1: { label: "Varianta 1", img: "assets/v1-search.jpg" },
+    v2: { label: "Varianta 2", img: "assets/v2-search.jpg" },
   },
   details: {
     title: "Alege varianta de detalii/catalog",
-    v1: { label: "Varianta 1", img: "assets/v1-details.png" },
-    v2: { label: "Varianta 2", img: "assets/v2-details.png" },
+    v1: { label: "Varianta 1", img: "assets/v1-details.jpg" },
+    v2: { label: "Varianta 2", img: "assets/v2-details.jpg" },
   },
 };
 
