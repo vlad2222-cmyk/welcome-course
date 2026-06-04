@@ -242,7 +242,7 @@ function StepNevoia({ data, set, showErr }) {
             <input className={cls("nume")} placeholder="Nume utilizator"
               value={n.nume} onChange={(e) => upd("nume", e.target.value)} />
           </div>
-          <span className="stmt-connector">este un/o</span>
+          <span className="stmt-connector">{"\u00A0este un/o\u00A0"}</span>
           <div className="stmt-field">
             <input className={cls("caracteristica")} placeholder="Ex: student, părinte, antreprenor"
               value={n.caracteristica} onChange={(e) => upd("caracteristica", e.target.value)} />
