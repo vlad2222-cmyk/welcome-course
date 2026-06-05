@@ -1,13 +1,14 @@
 /* Service worker for the Dragon Wizard.
    Precaches the app shell + all screenshots + CDN libs on first online load,
    then serves everything cache-first so the full flow works OFFLINE afterwards.
-   20260605102859 is replaced with a fresh token on every deploy to bust the cache. */
-const CACHE = "dragon-wizard-20260605102859";
+   20260605103808 is replaced with a fresh token on every deploy to bust the cache. */
+const CACHE = "dragon-wizard-20260605103808";
 
 const ASSETS = [
   "./",
   "./index.html",
   "./app.jsx",
+  "./images.js",
   "./styles.css",
   "./assets/gameloft-logo.png",
   "./assets/v1-home.jpg",

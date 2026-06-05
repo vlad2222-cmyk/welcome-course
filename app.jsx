@@ -49,21 +49,26 @@ function applyTheme(primary) {
   document.body.style.backgroundColor = mix(primary, PAGE_BASE, 0.09);
 }
 
+// Use the base64 screenshots inlined by images.js (kept in memory => works offline).
+// Falls back to the file path if the inline bundle isn't present for any reason.
+const IMG = (typeof window !== "undefined" && window.IMG) || {};
+const imgFor = (key) => IMG[key] || ("assets/" + key + ".jpg");
+
 const VARIANTS = {
   home: {
     title: "Alege varianta de homepage",
-    v1: { label: "Varianta 1", img: "assets/v1-home.jpg" },
-    v2: { label: "Varianta 2", img: "assets/v2-home.jpg" },
+    v1: { label: "Varianta 1", img: imgFor("v1-home") },
+    v2: { label: "Varianta 2", img: imgFor("v2-home") },
   },
   search: {
     title: "Alege varianta de cautare",
-    v1: { label: "Varianta 1", img: "assets/v1-search.jpg" },
-    v2: { label: "Varianta 2", img: "assets/v2-search.jpg" },
+    v1: { label: "Varianta 1", img: imgFor("v1-search") },
+    v2: { label: "Varianta 2", img: imgFor("v2-search") },
   },
   details: {
     title: "Alege varianta de detalii/catalog",
-    v1: { label: "Varianta 1", img: "assets/v1-details.jpg" },
-    v2: { label: "Varianta 2", img: "assets/v2-details.jpg" },
+    v1: { label: "Varianta 1", img: imgFor("v1-details") },
+    v2: { label: "Varianta 2", img: imgFor("v2-details") },
   },
 };
 
