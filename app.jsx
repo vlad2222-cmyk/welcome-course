@@ -390,6 +390,22 @@ function App() {
   const [data, setData] = useState(load);
   const [showErr, setShowErr] = useState(false);
   const topRef = useRef(null);
+  const preloadRef = useRef([]);
+
+  // Preload the comparison screenshots in the background on first open,
+  // so they're already cached by the time the user reaches the compare steps.
+  // Refs are kept so the browser doesn't garbage-collect (and cancel) them.
+  useEffect(() => {
+    const urls = [];
+    Object.keys(VARIANTS).forEach((k) => {
+      urls.push(VARIANTS[k].v1.img, VARIANTS[k].v2.img);
+    });
+    preloadRef.current = urls.map((u) => {
+      const im = new Image();
+      im.src = u;
+      return im;
+    });
+  }, []);
 
   useEffect(() => {
     localStorage.setItem(STORAGE_KEY, JSON.stringify(data));
